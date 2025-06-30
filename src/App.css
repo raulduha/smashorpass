@@ -1,38 +1,212 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@900&display=swap');
+
+:root {
+  --smash-color: #FF2D55;
+  --pass-color: #5856D6;
+  --bg-color: #121212;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: white;
   text-align: center;
+  transition: all 0.5s;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app.result-active {
+  background-color: #000;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Título con más personalidad */
+.title {
+  font-family: 'Bungee', cursive;
+  font-size: 4.5rem;
+  margin-bottom: 3rem;
+  color: white;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  line-height: 1.2;
+}
+
+.title span {
+  font-size: 2rem;
+  display: inline-block;
+  margin: 0 0.5rem;
+  color: #888;
+}
+
+/* Botones más atractivos */
+.buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+button {
+  padding: 1.2rem 2.5rem;
+  font-size: 1.8rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  min-width: 200px;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 10%,
+    rgba(255,255,255,0.2) 50%,
+    transparent 90%
+  );
+  transform: translateX(-100%);
+}
+
+button:hover::after {
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  100% {
+    transform: translateX(100%);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.smash-btn {
+  background-color: var(--smash-color);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.pass-btn {
+  background-color: var(--pass-color);
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Resultado con más impacto */
+.result {
+  font-size: 6rem;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.result.smash {
+  color: var(--smash-color);
+  text-shadow: 0 0 20px rgba(255, 45, 85, 0.5);
+}
+
+.result.pass {
+  color: var(--pass-color);
+  text-shadow: 0 0 20px rgba(88, 86, 214, 0.5);
+}
+
+.emoji {
+  font-size: 8rem;
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-20px); }
+}
+
+.reset-btn {
+  background-color: transparent;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.8rem 2rem;
+  border: 2px solid white;
+  border-radius: 50px;
+  margin-top: 3rem;
+  transition: all 0.3s;
+}
+
+.reset-btn:hover {
+  background-color: white;
+  color: black;
+  transform: none;
+}
+
+/* Animación de decisión */
+.decision-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 100;
+}
+
+.pulse-effect {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--smash-color);
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(0.8); opacity: 0.6; }
+  to { transform: scale(1.2); opacity: 0.9; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 3rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  button {
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    min-width: 160px;
   }
 }
