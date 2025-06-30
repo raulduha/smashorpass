@@ -29,6 +29,13 @@ body, html {
   transition: all 0.5s;
   width: 100%;
 }
+.result-text {
+  font-size: clamp(2rem, 12vw, 4.5rem); /* min 32 px, escala hasta 72 px aprox. */
+  line-height: 1;
+  margin: 0;
+  overflow-wrap: anywhere;   /* evita futuros desbordes */
+}
+
 
 .app.result-active {
   background-color: #000;
@@ -237,7 +244,8 @@ button:hover {
   }
   
   .result {
-    font-size: 2.5rem;
+    /* font-size: clamp(3rem, 15vw, 6rem);  <- fuera  */
+    width: 100%;
   }
   
   .emoji {
